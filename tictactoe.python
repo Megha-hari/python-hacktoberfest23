@@ -1,0 +1,60 @@
+"""                                                             TIC-TAC-TOE 
+                          Tic-tac-toe is played on a three-by-three grid by two players, who alternately place the marks X and O in one of the nine spaces in the grid.
+                                                                                           """
+import numpy
+board=numpy.array([['-','-','-'],['-','-','-'],['-','-','-']])
+p1='X'
+p2='O'
+def place(symbol):
+    print(numpy.matrix(board))
+    while(1):
+        row=int(input('enter row :1,2,3'))
+        col=int(input('enter column:1,2,3'))
+    
+        if row>0 and row<4 and col>0 and col<4 and board[row-1][col-1]=='-':
+            break
+        else:
+            print('invalid entry')
+    board[row-1][col-1]=symbol
+def won(symbol):
+    return chech_row(symbol) or chech_col(symbol) or chech_diagonal(symbol)
+def chech_row(symbol):
+    for i in range(3):
+        count=0
+        for j in range(3):
+            if board[i][j]==symbol:
+                count=count+1 
+        if count==3:
+            print(symbol,'won')
+            return True
+def chech_col(symbol):
+    for j in range(3):
+        count=0
+        for i in range(3):
+            if board[i][j]==symbol:
+                count=count+1 
+        if count==3:
+            print(symbol,'won')
+            return True
+def chech_diagonal(symbol):
+    if board[0][2]==board[1][1] and board[1][1]==board[2][0] and board[1][1]==symbol:
+        print(symbol,'won')
+        return True
+    if board[0][0]==board[1][1] and board[1][1]==board[2][2] and board[1][1]==symbol:
+        print(symbol,'won')
+        return True
+def play():
+    for turn in range(9):
+        if turn%2==0:
+            print('X turn')
+            place(p1)
+            if won(p1):
+                break
+        else:
+            print('O turn')
+            place(p2)
+            if won(p2):
+                break
+    if not(won(p1)) and not(won(p2)):
+        print('draw')      
+        
